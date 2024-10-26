@@ -332,7 +332,7 @@ function mapStateToProps(state: types.IState): IConnectedProps {
         messages: util.getSafe(state, ['session', 'broom', 'messages'], []),
         matchedFiles: util.getSafe(state, ['session', 'broom', 'matchedFiles'], []),
         stagingPath: selectors.installPathForGame(state, gameId),
-        enabledMods: Object.keys(profileMods).filter(m => profileMods[m].enabled).map(x => mods[x]),
+        enabledMods: Object.keys(profileMods).filter(m => profileMods[m].enabled).filter(m => mods[m] != undefined).map(x => mods[x]),
         deleteOption: util.getSafe(state, ['settings', 'interface', 'broomDeleteFiles'], false),
         unhideOption: util.getSafe(state, ['settings', 'interface', 'broomUnhide'], false),
     };
