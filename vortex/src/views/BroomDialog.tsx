@@ -106,10 +106,10 @@ class BroomDialog extends ComponentEx<IProps, IComponentState> {
                     await fs.unlinkAsync(file)
                 }
                 else if (this.props.unhideOption) {
-                    await fs.renameAsync(file, file.replace(/.vohidden$/, ""))
+                    await fs.renameAsync(file, file.replace(/\.vohidden[0-9.]*$/, ""))
                 }
                 else {
-                    await fs.renameAsync(file, file + ".vohidden")
+                    await fs.renameAsync(file, file + ".vohidden" + performance.now())
                 }
             }
             else {
@@ -190,7 +190,7 @@ class BroomDialog extends ComponentEx<IProps, IComponentState> {
         if (globalRulesList.length == 0)
             return
 
-        var skipPattern = /\.vohidden$/
+        var skipPattern = /\.vohidden[0-9.]*$/
         if (this.props.deleteOption || this.props.unhideOption)
             skipPattern = null;
 
